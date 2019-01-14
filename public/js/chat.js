@@ -1,7 +1,7 @@
 $(function () {
-	let socket = io();
+  let socket = io();
     
-	// When user submit the message
+  // When user submit the message
   $('form').submit(function() { 
     let data = {
       name: $('#userName').val(), 
@@ -16,6 +16,6 @@ $(function () {
 
   // Server updating the messages of the Client's side
   socket.on('chat-message', function(data) {
-	  $('#messages').append($('<li>').text(data.name + ": " + data.message));
-	});
+    $('#messages').append($('<li>').text(data.name + ": " + data.message));
+  });
 });
