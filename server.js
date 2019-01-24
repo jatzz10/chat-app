@@ -24,11 +24,15 @@ io.on('connection', function(socket) {
       io.emit('chat-message', data);
    });
 
+   socket.on('typing', (data) => {
+      socket.broadcast.emit('typing', data);
+   });
+
    socket.on('disconnect', function() {
       console.log("A user left.");
    });
 });
 
 http.listen(3000, function() {
-   console.log("Listening on port: 3000" + "\nUser Status:");
+   console.log("Listening on port: 3000 Hello Neo" + "\nUser Status:");
 });

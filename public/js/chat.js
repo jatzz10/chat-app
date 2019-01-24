@@ -18,4 +18,13 @@ $(function () {
   socket.on('chat-message', function(data) {
     $('#messages').append($('<li>').text(data.name + ": " + data.message));
   });
+
+  clientMessage.on('keypress', () => {
+    socket.emit('typing');
+  });
+
+  socket.on('typing', (data) => {
+    feedback.html("<p><i>" + data.name + "is typing a message..." + "</i></p>");
+  });
+
 });
