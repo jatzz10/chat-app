@@ -19,13 +19,16 @@ app.use(express.static(__dirname + '/public'));
 io.on('connection', function(socket) {
    console.log("New user connected.");
    
+   socket.name = "Anonymous";
+
    // Broadcasting messages to all the clients
    socket.broadcast.on('chat-message', function(data) {
       io.emit('chat-message', data);
    });
 
    socket.on('typing', (data) => {
-      socket.broadcast.emit('typing', data);
+      console.log(socket.name);
+      socket.broadcast.emit('typing', {name: socket.name});
    });
 
    socket.on('disconnect', function() {
@@ -34,5 +37,5 @@ io.on('connection', function(socket) {
 });
 
 http.listen(3000, function() {
-   console.log("Listening on port: 3000 Hello Neo" + "\nUser Status:");
+   console.log("Listening on port: 3000" + "\nUser Status:");
 });
